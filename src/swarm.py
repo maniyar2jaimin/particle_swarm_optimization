@@ -66,16 +66,16 @@ from operator import add, sub, mul, mod
 import pygame
 from pygame.locals import *
 
-screen_size = 640, 480
-particle_pool = 100
-initial_solution = 100, 100
-learning_factors = 1, 1
-maximum_velocity = 15
-frame_rate = 35
+SCREEN_SIZE = 640, 480
+PARTICLE_POOL = 100
+INITIAL_SOLUTION = 100, 100
+LEARNING_FACTORS = 1, 1
+MAXIMUM_VELOCITY = 15
+FRAME_RATE = 35
 
 solution_delta = (-120, 120)
 
-center = screen_size[0]/2, screen_size[1]/2
+center = SCREEN_SIZE[0]/2, SCREEN_SIZE[1]/2
 radius = 100
 points = [(center[0], center[1] - radius),
           (center[0] + radius, center[1]),
@@ -106,14 +106,14 @@ class Coord(tuple):
 
 class Particle(object):
     global_best = temp_global_best = Coord((0, 0))
-    vmax = maximum_velocity
-    solution = Coord(initial_solution)
-    c1, c2 = learning_factors
+    vmax = MAXIMUM_VELOCITY
+    solution = Coord(INITIAL_SOLUTION)
+    c1, c2 = LEARNING_FACTORS
 
     fitness_source =  None
 
     def __init__(self):
-        self.local_best = self.position = self.old_position = Coord((randint(0,screen_size[0]), randint(0,screen_size[1])))
+        self.local_best = self.position = self.old_position = Coord((randint(0,SCREEN_SIZE[0]), randint(0,SCREEN_SIZE[1])))
         self.velocity = Coord((0, 0))
 
     def plot(self):
@@ -126,7 +126,7 @@ class Particle(object):
 
     @classmethod
     def update_solution(self):
-        self.solution = Coord((randint(0, screen_size[0]), randint(0, screen_size[1])))
+        self.solution = Coord((randint(0, SCREEN_SIZE[0]), randint(0, SCREEN_SIZE[1])))
 
     def tick(self):
         self._check_fitness()
@@ -166,7 +166,7 @@ class Particle(object):
 
 def initialize_screen():
     pygame.init()
-    screen = pygame.display.set_mode(screen_size)
+    screen = pygame.display.set_mode(SCREEN_SIZE)
 
     background = pygame.Surface(screen.get_size())
     background = background.convert()
@@ -180,7 +180,7 @@ def initialize_screen():
 
 def initialize_particles(screen):
     particles = []
-    for i in xrange(particle_pool):
+    for i in xrange(PARTICLE_POOL):
         particle = Particle()
         particle.screen = screen
         particles.append(particle)
@@ -196,7 +196,7 @@ def main():
     count = initial_count
 
     while 1:
-        time.sleep(1.0/frame_rate)
+        time.sleep(1.0/FRAME_RATE)
         for event in pygame.event.get():
             if event.type == QUIT:
                 return
