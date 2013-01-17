@@ -69,7 +69,6 @@ def initialize_plot():
 
 def draw_circle(point, radius, color):
     for r in range(radius, 0, -1):
-        #pygame.draw.circle(SCREEN, (255, 255, 10), point, radius)
         pygame.draw.circle(SCREEN, color, point, radius)
 
 
@@ -106,7 +105,6 @@ def main():
                 point = choice(PLOT)
                 color = eval(COLOR_STRING)
             NEW_DICT[point] = radius+direction, direction, color
-        #MASTER_DICT[point] = radius + direction, direction
         MASTER_DICT = NEW_DICT
 
         SCREEN.unlock()
